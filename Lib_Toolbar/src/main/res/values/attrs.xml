@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="Toolbar_Style">
+        <attr name="statusBarBg" format="color" />
+        <attr name="isSupportImmersion" format="boolean" />
+        <attr name="title" format="string" />
+        <attr name="titleColor" format="color" />
+        <attr name="titleSize" format="dimension" />
+        <attr name="isSupportBottomLine" format="boolean" />
+        <attr name="bottomLineColor" format="color" />
+        <attr name="bottomLineHeight" format="dimension" />
+    </declare-styleable>
+</resources>
