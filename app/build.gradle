@@ -34,4 +34,5 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
 
     api project(':Lib_Toolbar')
+    implementation 'androidx.transition:transition:1.2.0'
 }

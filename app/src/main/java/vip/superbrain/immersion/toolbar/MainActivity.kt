@@ -9,10 +9,16 @@ import android.text.SpannableStringBuilder
 import android.text.Spanned
 import android.text.style.AbsoluteSizeSpan
 import android.text.style.ForegroundColorSpan
+import androidx.constraintlayout.widget.ConstraintSet
+import androidx.transition.AutoTransition
+import androidx.transition.TransitionManager
 import kotlinx.android.synthetic.main.activity_main.*
 import vip.superbrain.immersion.lib.toolbar.StatusBarUtils
 
 class MainActivity : AppCompatActivity() {
+
+    var constraintSet1 = ConstraintSet()
+    var constraintSet2 = ConstraintSet()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -22,7 +28,26 @@ class MainActivity : AppCompatActivity() {
         init()
     }
 
+    var isChange = false
+
     fun init() {
+        constraintSet1.clone(csytOuter)
+        constraintSet2.clone(this, R.layout.layout_exchange)
+
+        btnBottom.setOnClickListener {
+            isChange = !isChange
+            if (isChange) {
+                TransitionManager.beginDelayedTransition(csytOuter);
+                constraintSet2.applyTo(csytOuter)
+            } else {
+                var transition = AutoTransition()
+                transition.setDuration(500)
+                TransitionManager.beginDelayedTransition(csytOuter, transition)
+                constraintSet1.applyTo(csytOuter)
+            }
+        }
+
+
         var content =
             "<p><font size=\"3\" color=\"red\">设置了字号和颜色</font></p>" +
                     "<b><font size=\"5\" color=\"blue\">设置字体加粗 蓝色 5号</font></font></b></br>" +
