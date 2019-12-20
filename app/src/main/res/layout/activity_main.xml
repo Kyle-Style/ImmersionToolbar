@@ -29,74 +29,48 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/itbToolbar" />
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/csytContainer"
-        android:layout_width="0dp"
+    <vip.superbrain.immersion.toolbar.SlideHorizontalLayout
+        android:id="@+id/shytContent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:background="#ff0000"
-        app:layout_constraintLeft_toLeftOf="@+id/vTemp"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/itbToolbar">
 
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/avatar"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_marginLeft="5dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="5dp"
-            android:src="@drawable/ic_launcher_background"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/csytContainer"
+            android:layout_width="wrap_content"
+            android:layout_height="100dp"
+            android:layout_gravity="right"
+            android:layout_marginTop="20dp">
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/name"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp"
-        android:gravity="center"
-        android:text="网红达人 >"
-        app:layout_constraintBottom_toBottomOf="@+id/csytContainer"
-        app:layout_constraintEnd_toEndOf="@+id/csytContainer"
-        app:layout_constraintTop_toTopOf="@+id/csytContainer" />
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/avatar"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:src="@drawable/ic_launcher_background"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <View
-        android:id="@+id/vTemp"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        app:layout_constraintBottom_toBottomOf="@+id/csytContainer"
-        app:layout_constraintEnd_toStartOf="@+id/name"
-        app:layout_constraintTop_toTopOf="@+id/csytContainer" />
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/name"
+            android:layout_width="wrap_content"
+            android:layout_height="100dp"
+            android:gravity="center_vertical"
+            android:text="只是因为在人群中多看了你一眼"
+            android:textColor="#FF0000" />
+    </vip.superbrain.immersion.toolbar.SlideHorizontalLayout>
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btn1"
+        android:id="@+id/btnChangeStatus"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Left"
-        android:textAllCaps="false"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btn2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Right"
-        android:textAllCaps="false"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btnBottom"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="BottomBtn"
-        android:textAllCaps="false"
+        android:text="点击切换状态"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent" />
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
