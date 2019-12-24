@@ -53,8 +53,8 @@ class MainActivity : AppCompatActivity() {
 
         btnChangeStatus.setOnClickListener {
             isChange = !isChange
-//            shytContent.showRightForce(isChange, false)
-//            Log.e(MainActivity::class.java.simpleName, "状态改变了")
+            shytContent.showForce(isChange, false)
+            Log.e(MainActivity::class.java.simpleName, "状态改变了")
 
             slContent.showForce(isChange, true)
         }
