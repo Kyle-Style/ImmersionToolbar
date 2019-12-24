@@ -10,31 +10,32 @@ import android.view.ViewGroup
 import androidx.core.view.ViewCompat
 import androidx.customview.widget.ViewDragHelper
 
-class SlideHorizontalLayout : ViewGroup {
+class SlideHorizontalLayout @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0) : ViewGroup(context, attrs, defStyleAttr) {
 
-    private var leftView: View? = null
-    private var rightView: View? = null
+    companion object {
+
+        var TAG = SlideLayout::class.java.simpleName
+
+        const val ANCHOR_LEFT = 0x0001
+        const val ANCHOR_RIGHT = 0x0100
+    }
+
+    private var contentView: View? = null
     private var helper: ViewDragHelper? = null
 
-    private var mLeftWidth = 0
-    private var mLeftHeight = 0
-    private var mRightWidth = 0
-    private var mRightHeight = 0
-    private var downX: Float = 0F
-    private var downY: Float = 0F
     private var hasScroll = false
     private var savedUpTime = 0L
-    private var mShowRight = false
+    private var mShow = false
+
+    private var downX: Float = 0F
+    private var downY: Float = 0F
+
+    private var contentHidePercent = 0.5F
 
     private var touchSlop: Int = ViewConfiguration.get(context).scaledTouchSlop
 
-    constructor(context: Context?) : super(context)
-    constructor(context: Context?, attrs: AttributeSet?) : super(context, attrs)
-    constructor(context: Context?, attrs: AttributeSet?, defStyleAttr: Int) : super(
-        context,
-        attrs,
-        defStyleAttr
-    )
+    // 吸附点位置
+    private var anchorPosition = ANCHOR_RIGHT
 
     override fun generateLayoutParams(attrs: AttributeSet): MarginLayoutParams {
         return MarginLayoutParams(context, attrs)
@@ -50,15 +51,18 @@ class SlideHorizontalLayout : ViewGroup {
 
     override fun onFinishInflate() {
         super.onFinishInflate()
-        check(childCount == 2) { "child count must equal 2" }
-        leftView = getChildAt(0)
-        rightView = getChildAt(1)
+        check(childCount <= 1) { "${this::class.java.simpleName} can host only one child" }
+        if (childCount == 0) {
+            return
+        }
+        contentView = getChildAt(0)
         helper = ViewDragHelper.create(this, 1f, InnerCallBack())
     }
 
     private inner class InnerCallBack : ViewDragHelper.Callback() {
+
         override fun tryCaptureView(child: View, pointerId: Int): Boolean {
-            return child === leftView || child === rightView
+            return child === contentView
         }
 
         override fun onViewCaptured(capturedChild: View, activePointerId: Int) {
@@ -66,18 +70,22 @@ class SlideHorizontalLayout : ViewGroup {
         }
 
         override fun clampViewPositionHorizontal(child: View, left: Int, dx: Int): Int {
-            if (child === leftView) {
-                if (left >= width - mLeftWidth) {
-                    return width - mLeftWidth
-                } else if (left <= width - mLeftWidth - mRightWidth) {
-                    return width - mLeftWidth - mRightWidth
-                }
-            }
-            if (child === rightView) {
-                if (left >= width) {
-                    return width
-                } else if (left <= width - mRightWidth) {
-                    return width - mRightWidth
+            if (child === contentView) {
+                when (anchorPosition) {
+                    ANCHOR_LEFT -> {
+                        if (left < -getHideWidth()) {
+                            return -getHideWidth()
+                        } else if (left > 0) {// 此处可以添加是否限制left
+                            return 0
+                        }
+                    }
+                    else -> {
+                        if (left < width - getContentWidth()) {
+                            return width - getContentWidth()
+                        } else if (left > width - getHideWidth()) {// 此处可以添加是否限制left
+                            return width - getHideWidth()
+                        }
+                    }
                 }
             }
             return left
@@ -91,62 +99,73 @@ class SlideHorizontalLayout : ViewGroup {
             dy: Int
         ) {
             super.onViewPositionChanged(changedView, left, top, dx, dy)
-            if (changedView === leftView) {
-                rightView?.also {
-                    it.layout(
-                        left + mLeftWidth,
-                        top,
-                        left + mLeftWidth + mRightWidth,
-                        top + mRightHeight
-                    )
-                }
-            }
-            if (changedView === rightView) {
-                leftView?.also {
-                    it.layout(
-                        left - mLeftWidth,
-                        top,
-                        left - mLeftWidth + mRightWidth,
-                        top + mLeftHeight
-                    )
+            if (changedView === contentView) {
+                when (anchorPosition) {
+                    ANCHOR_LEFT, ANCHOR_RIGHT -> {
+                        contentView!!.layout(
+                            left,
+                            (height - getContentHeight()) / 2,
+                            left + getContentWidth(),
+                            (height + getContentHeight()) / 2
+                        )
+                    }
+                    else -> {
+                    }
                 }
             }
             invalidate()
         }
 
         override fun onViewReleased(releasedChild: View, xvel: Float, yvel: Float) {
-            val left = rightView!!.left
-            if (width - left > mRightWidth / 2) {
-                showRight(true)
-                listener?.onOpen(this@SlideHorizontalLayout)
-            } else {
-                showRight(false)
-                listener?.onClose(this@SlideHorizontalLayout)
+            var childLeft = releasedChild.left
+            when (anchorPosition) {
+                ANCHOR_LEFT -> {
+                    show(childLeft > getHideWidth() / 2)
+                }
+                else -> {
+                    show(childLeft < width - (getHideWidth() + getContentWidth()) / 2)
+                }
             }
             super.onViewReleased(releasedChild, xvel, yvel)
         }
     }
 
-    fun showRightForce(showRight: Boolean, force: Boolean) {
+    fun showForce(show: Boolean, force: Boolean) {
         if (force) {
-            showRight(showRight)
+            show(show)
         } else {
-            if (mShowRight == showRight) {
+            if (mShow == show) {
                 return
             }
-            showRight(showRight)
+            show(show)
         }
     }
 
-    protected fun showRight(showRight: Boolean) {
-        if (showRight) {
-            helper?.smoothSlideViewTo(leftView!!, width - mLeftWidth - mRightWidth, 0)
-            helper?.smoothSlideViewTo(rightView!!, width - mRightWidth, 0)
-            mShowRight = true
+    protected fun show(show: Boolean) {
+        if (show) {
+            onSlideListener?.onOpen(this@SlideHorizontalLayout)
         } else {
-            helper?.smoothSlideViewTo(rightView!!, width, 0)
-            helper?.smoothSlideViewTo(leftView!!, width - mLeftWidth, 0)
-            mShowRight = false
+            onSlideListener?.onClose(this@SlideHorizontalLayout)
+        }
+        when (anchorPosition) {
+            ANCHOR_LEFT -> {
+                if (show) {
+                    helper?.smoothSlideViewTo(contentView!!, 0, (height - getContentHeight()) / 2)
+                    mShow = true
+                } else {
+                    helper?.smoothSlideViewTo(contentView!!, -getHideWidth(), (height - getContentHeight()) / 2)
+                    mShow = false
+                }
+            }
+            else -> {
+                if (show) {
+                    helper?.smoothSlideViewTo(contentView!!, width - getContentWidth(), (height - getContentHeight()) / 2)
+                    mShow = true
+                } else {
+                    helper?.smoothSlideViewTo(contentView!!, width - (getContentWidth() - getHideWidth()), (height - getContentHeight()) / 2)
+                    mShow = false
+                }
+            }
         }
         ViewCompat.postInvalidateOnAnimation(this)
     }
@@ -159,23 +178,52 @@ class SlideHorizontalLayout : ViewGroup {
     }
 
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
-        val pWidth = MeasureSpec.getSize(widthMeasureSpec)
-        val pHeight = MeasureSpec.getSize(heightMeasureSpec)
-        measureDefineChild(leftView, widthMeasureSpec, heightMeasureSpec, pWidth, pHeight)
-        measureDefineChild(rightView, widthMeasureSpec, heightMeasureSpec, pWidth, pHeight)
-        setMeasuredDimension(
-            leftView!!.measuredWidth + rightView!!.measuredWidth,
-            Math.max(leftView!!.measuredHeight, rightView!!.measuredHeight)
-        )
+        if (childCount == 1) {
+            val pWidth = MeasureSpec.getSize(widthMeasureSpec)
+            val pHeight = MeasureSpec.getSize(heightMeasureSpec)
+            measureDefineChild(contentView, widthMeasureSpec, heightMeasureSpec, pWidth, pHeight)
+        }
+        setMeasuredDimension(contentView!!.measuredWidth, contentView!!.measuredHeight)
     }
 
-    private fun measureDefineChild(
-        child: View?,
-        widthMeasureSpec: Int,
-        heightMeasureSpec: Int,
-        pWidth: Int,
-        pHeight: Int
-    ) {
+    override fun onLayout(changed: Boolean, l: Int, t: Int, r: Int, b: Int) {
+        if (childCount == 1) {
+            when (anchorPosition) {
+                ANCHOR_LEFT -> {
+                    if (mShow) {
+                        contentView!!.layout(0, (height - getContentHeight()) / 2, getContentWidth(), (height + getContentHeight()) / 2)
+                    } else {
+                        contentView!!.layout(-getHideWidth(), (height - getContentHeight()) / 2, -getHideWidth() + getContentWidth(), (height + getContentHeight()) / 2)
+                    }
+                }
+                else -> {
+                    if (mShow) {
+                        contentView!!.layout(width - getContentWidth(), (height - getContentHeight()) / 2, width, (height + getContentHeight()) / 2)
+                    } else {
+                        contentView!!.layout(width - (getContentWidth() - getHideWidth()), (height - getContentHeight()) / 2, width + getHideWidth(), (height + getContentHeight()) / 2)
+                    }
+                }
+            }
+        }
+    }
+
+    private fun getContentWidth(): Int {
+        return contentView!!.measuredWidth
+    }
+
+    private fun getContentHeight(): Int {
+        return contentView!!.measuredHeight
+    }
+
+    private fun getHideWidth(): Int {
+        return (contentHidePercent * getContentWidth()).toInt()
+    }
+
+    private fun getHideHeight(): Int {
+        return (contentHidePercent * getContentHeight()).toInt()
+    }
+
+    private fun measureDefineChild(child: View?, widthMeasureSpec: Int, heightMeasureSpec: Int, pWidth: Int, pHeight: Int) {
         val contentLayoutParams = child!!.layoutParams
         val height = contentLayoutParams.height
         val width = contentLayoutParams.width
@@ -186,29 +234,17 @@ class SlideHorizontalLayout : ViewGroup {
             if (width == LayoutParams.MATCH_PARENT) {
                 contentWidthMeasureSpec = MeasureSpec.makeMeasureSpec(pWidth, MeasureSpec.EXACTLY)
             } else if (width > 0) {
-                contentWidthMeasureSpec = MeasureSpec.makeMeasureSpec(
-                    Math.min(width, pWidth),
-                    MeasureSpec.EXACTLY
-                )
+                contentWidthMeasureSpec = MeasureSpec.makeMeasureSpec(Math.min(width, pWidth), MeasureSpec.EXACTLY)
             } else if (width == LayoutParams.WRAP_CONTENT) {
-                contentWidthMeasureSpec = MeasureSpec.makeMeasureSpec(
-                    Math.min(width, pWidth),
-                    MeasureSpec.AT_MOST
-                )
+                contentWidthMeasureSpec = MeasureSpec.makeMeasureSpec(Math.min(width, pWidth), MeasureSpec.AT_MOST)
             }
         } else if (widthMode == MeasureSpec.AT_MOST) {
             if (width == LayoutParams.MATCH_PARENT) {
                 contentWidthMeasureSpec = MeasureSpec.makeMeasureSpec(pWidth, MeasureSpec.AT_MOST)
             } else if (width > 0) {
-                contentWidthMeasureSpec = MeasureSpec.makeMeasureSpec(
-                    Math.min(width, pWidth),
-                    MeasureSpec.EXACTLY
-                )
+                contentWidthMeasureSpec = MeasureSpec.makeMeasureSpec(Math.min(width, pWidth), MeasureSpec.EXACTLY)
             } else if (width == LayoutParams.WRAP_CONTENT) {
-                contentWidthMeasureSpec = MeasureSpec.makeMeasureSpec(
-                    Math.min(width, pWidth),
-                    MeasureSpec.AT_MOST
-                )
+                contentWidthMeasureSpec = MeasureSpec.makeMeasureSpec(Math.min(width, pWidth), MeasureSpec.AT_MOST)
             }
         }
         var contentHeightMeasureSpec = 0
@@ -232,20 +268,6 @@ class SlideHorizontalLayout : ViewGroup {
         child.measure(contentWidthMeasureSpec, contentHeightMeasureSpec)
     }
 
-    override fun onLayout(changed: Boolean, l: Int, t: Int, r: Int, b: Int) {
-        mLeftWidth = leftView!!.measuredWidth
-        mLeftHeight = leftView!!.measuredHeight
-        mRightHeight = rightView!!.measuredHeight
-        mRightWidth = rightView!!.measuredWidth
-        if (mShowRight) {
-            leftView!!.layout(width - mLeftWidth - mRightWidth, 0, width - mRightWidth, mLeftHeight)
-            rightView!!.layout(width - mRightWidth, 0, width + mLeftWidth, mRightHeight)
-        } else {
-            leftView!!.layout(width - mLeftWidth, 0, width, mLeftHeight)
-            rightView!!.layout(width, 0, width + mLeftWidth + mRightWidth, mRightHeight)
-        }
-    }
-
     override fun dispatchTouchEvent(ev: MotionEvent?): Boolean {
         when (ev?.actionMasked) {
             MotionEvent.ACTION_DOWN -> {
@@ -266,7 +288,7 @@ class SlideHorizontalLayout : ViewGroup {
             MotionEvent.ACTION_UP -> {
                 if (!hasScroll) {
                     if (System.currentTimeMillis() - savedUpTime > 800) {
-                        listener?.also {
+                        onSlideListener?.also {
                             it.onClick(this@SlideHorizontalLayout)
                         }
                     } else {
@@ -288,7 +310,7 @@ class SlideHorizontalLayout : ViewGroup {
         return true
     }
 
-    private var listener: OnSlideListener? = null
+    private var onSlideListener: OnSlideListener? = null
 
     interface OnSlideListener {
         fun onOpen(slideDelete: SlideHorizontalLayout?)
@@ -297,6 +319,6 @@ class SlideHorizontalLayout : ViewGroup {
     }
 
     fun setListener(listener: OnSlideListener?) {
-        this.listener = listener
+        this.onSlideListener = listener
     }
 }

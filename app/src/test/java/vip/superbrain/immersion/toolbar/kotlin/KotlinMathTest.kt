@@ -1,5 +1,7 @@
 package vip.superbrain.immersion.toolbar.kotlin
 
+import org.junit.Test
+
 class KotlinMathTest {
 
 
@@ -21,4 +23,9 @@ class KotlinMathTest {
     这些函数同样也有 Float 参数版本(但不包括常量)。
      * */
 
+    @Test
+    fun biggerTest() {
+        var number: Int = 1
+        assert(number == 1)
+    }
 }

@@ -53,9 +53,26 @@ class MainActivity : AppCompatActivity() {
 
         btnChangeStatus.setOnClickListener {
             isChange = !isChange
-            shytContent.showRightForce(isChange, false)
-            Log.e(MainActivity::class.java.simpleName, "状态改变了")
+//            shytContent.showRightForce(isChange, false)
+//            Log.e(MainActivity::class.java.simpleName, "状态改变了")
+
+            slContent.showForce(isChange, true)
         }
+
+        slContent.setListener(object : SlideLayout.OnSlideListener {
+
+
+            override fun onOpen(slideDelete: SlideLayout?) {
+                Toast.makeText(baseContext, "展开", Toast.LENGTH_SHORT).show()
+            }
+
+            override fun onClose(slideDelete: SlideLayout?) {
+                Toast.makeText(baseContext, "关闭", Toast.LENGTH_SHORT).show()
+            }
+
+            override fun onClick(slideDelete: SlideLayout?) {
+            }
+        })
 
         shytContent.setListener(object : SlideHorizontalLayout.OnSlideListener {
 
