@@ -22,43 +22,50 @@
             app:layout_constraintTop_toTopOf="parent" />
     </vip.superbrain.immersion.lib.toolbar.ImmersionToolbar>
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/tvContent"
+    <vip.superbrain.immersion.toolbar.ShadowLayout
+        android:id="@+id/shadowTop"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/itbToolbar" />
+        app:layout_constraintTop_toBottomOf="@+id/itbToolbar"
+        app:sl_shadow_color="@color/colorAccent"
+        app:sl_shadow_distance="2dp"
+        app:sl_shadowed="true"
+        app:sl_shadow_radius="2dp"
+        app:sl_shadow_angle="45">
 
-    <vip.superbrain.immersion.toolbar.SlideHorizontalLayout
-        android:id="@+id/shytContent"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:visibility="visible"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/itbToolbar">
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/csytContainer"
+        <vip.superbrain.immersion.toolbar.SlideHorizontalLayout
+            android:id="@+id/shytContent"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:visibility="visible"
             android:layout_gravity="right"
-            android:layout_marginTop="20dp">
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/itbToolbar">
 
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/avatar"
-                android:layout_width="200dp"
-                android:layout_height="80dp"
-                android:layout_marginLeft="5dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginBottom="5dp"
-                android:scaleType="fitXY"
-                android:src="@drawable/ic_launcher_background"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/csytContainer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:layout_marginTop="20dp">
 
-    </vip.superbrain.immersion.toolbar.SlideHorizontalLayout>
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/avatar"
+                    android:layout_width="200dp"
+                    android:layout_height="80dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/ic_launcher_background"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </vip.superbrain.immersion.toolbar.SlideHorizontalLayout>
+    </vip.superbrain.immersion.toolbar.ShadowLayout>
 
     <vip.superbrain.immersion.toolbar.SlideLayout
         android:id="@+id/slContent"
@@ -96,8 +103,44 @@
         android:id="@+id/btnChangeStatus"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="200dp"
         android:text="点击切换状态"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnNoStatus"
+        android:layout_width="100dp"
+        android:layout_height="70dp"
+        android:background="@null"
+        android:text="点击无状态"
+        app:layout_constraintStart_toEndOf="@+id/btnChangeStatus"
+        app:layout_constraintTop_toTopOf="@+id/btnChangeStatus" />
+
+    <vip.superbrain.immersion.toolbar.ShadowLayout
+        android:id="@+id/shadowContent"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="200dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/itbToolbar"
+        app:sl_shadow_color="@color/colorAccent"
+        app:sl_shadow_distance="2dp"
+        app:sl_shadowed="true"
+        app:sl_shadow_radius="2dp"
+        app:sl_shadow_angle="45">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="50dp"
+            android:layout_marginTop="50dp"
+            android:background="@color/colorAccent"
+            android:padding="10dp"
+            android:text="点击切换状态"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </vip.superbrain.immersion.toolbar.ShadowLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
