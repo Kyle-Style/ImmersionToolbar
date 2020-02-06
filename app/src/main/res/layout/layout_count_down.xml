@@ -1,0 +1,122 @@
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="0dp"
+    android:layout_height="0dp"
+    android:background="@drawable/bg_live_red_envelopes_create_or_increase_amount"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintDimensionRatio="h,250:332"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintWidth_percent="0.67">
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/glCenterHorizontal"
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.5" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/ivAvatar"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="24dp"
+        android:src="@drawable/ic_launcher_background"
+        app:layout_constraintDimensionRatio="w,1:1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintWidth_percent="0.192" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvShopName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:gravity="center"
+        android:text="南音神候"
+        android:textColor="#F3AA7C"
+        android:textSize="11dp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/glCenterHorizontal"
+        app:layout_constraintStart_toStartOf="@+id/glCenterHorizontal"
+        app:layout_constraintTop_toBottomOf="@+id/ivAvatar"
+        tools:text="南音神候" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvNote"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="发了一个红包"
+        android:textColor="#F9CC7F"
+        android:textSize="12dp"
+        app:layout_constraintEnd_toEndOf="@+id/glCenterHorizontal"
+        app:layout_constraintStart_toStartOf="@+id/glCenterHorizontal"
+        app:layout_constraintTop_toBottomOf="@+id/tvShopName" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvAmount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="50"
+        android:textColor="@color/color_gold_live_dialog"
+        android:textSize="38dp"
+        app:layout_constraintBottom_toTopOf="@+id/glCenterVertical"
+        app:layout_constraintEnd_toStartOf="@+id/tvAmountUnit"
+        app:layout_constraintStart_toStartOf="@+id/glCenterHorizontal"
+        app:layout_constraintTop_toBottomOf="@+id/tvNote" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvAmountUnit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="元"
+        android:textColor="@color/color_gold_live_dialog"
+        android:textSize="14dp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/tvAmount"
+        app:layout_constraintEnd_toEndOf="@+id/glCenterHorizontal"
+        app:layout_constraintStart_toEndOf="@+id/tvAmount" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/glCenterVertical"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.56" />
+
+    <vip.superbrain.immersion.toolbar.widget.progress.CircleProgressBar
+        android:id="@+id/cpbProgress"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:max="300"
+        android:progress="200"
+        app:cpb_outerBgWidth="4dp"
+        app:cpb_progressWidth="2dp"
+        app:cpb_textLineGap="0.1dp"
+        app:cpb_textSize="14dp"
+        app:layout_constraintDimensionRatio="w,1:1"
+        app:layout_constraintEnd_toEndOf="@+id/glCenterHorizontal"
+        app:layout_constraintStart_toStartOf="@+id/glCenterHorizontal"
+        app:layout_constraintTop_toBottomOf="@+id/glCenterVertical"
+        app:layout_constraintWidth_percent="0.32" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/ivClose"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="6dp"
+        android:padding="6dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/ic_launcher_background"
+        app:layout_constraintDimensionRatio="w,1:1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintWidth_percent="0.1" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

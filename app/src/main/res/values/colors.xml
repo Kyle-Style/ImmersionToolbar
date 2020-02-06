@@ -3,4 +3,10 @@
     <color name="colorPrimary">#008577</color>
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
+
+    <color name="white">#FFFFFF</color>
+
+    <color name="color_live_dialog_title">#F9CC7F</color>
+    <color name="color_gold_live_dialog">#F9CC7F</color>
+    <color name="color_amount_border_live_dialog">#FFB257</color>
 </resources>

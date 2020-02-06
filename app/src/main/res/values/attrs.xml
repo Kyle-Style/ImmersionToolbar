@@ -7,4 +7,23 @@
         <attr name="sl_shadow_radius" format="dimension" />
         <attr name="sl_shadow_color" format="color" />
     </declare-styleable>
+    <declare-styleable name="CirclePathTextView">
+        <attr name="startAngle" format="integer" />
+        <attr name="endAngle" format="integer" />
+        <attr name="radius" format="dimension" />
+        <attr name="text" format="string" />
+        <attr name="textColor" format="color" />
+        <attr name="textSize" format="dimension" />
+    </declare-styleable>
+    <declare-styleable name="CircleProgressBar">
+        <attr name="cpb_outerBgWidth" format="dimension" />
+        <attr name="cpb_progressWidth" format="dimension" />
+        <attr name="cpb_default_radius" format="dimension" />
+        <attr name="cpb_outerBgColor" format="color" />
+        <attr name="cpb_progressColor" format="color" />
+        <attr name="cpb_fillColor" format="color" />
+        <attr name="cpb_textColor" format="color" />
+        <attr name="cpb_textSize" format="dimension" />
+        <attr name="cpb_textLineGap" format="dimension" />
+    </declare-styleable>
 </resources>

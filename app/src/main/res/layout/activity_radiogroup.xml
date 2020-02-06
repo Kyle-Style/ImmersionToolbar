@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_live_red_envelopes_create_or_increase_amount"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintDimensionRatio="h,250:332"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintWidth_percent="0.67">
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/glCenterHorizontal"
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.5" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:gravity="center"
+            android:text="发红包"
+            android:textColor="@color/color_live_dialog_title"
+            android:textSize="15dp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@+id/glCenterHorizontal"
+            app:layout_constraintStart_toStartOf="@+id/glCenterHorizontal"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <RadioGroup
+            android:id="@+id/rgContent"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:checkedButton="@id/tvAmount5"
+            app:layout_constraintEnd_toEndOf="@+id/glCenterHorizontal"
+            app:layout_constraintStart_toStartOf="@+id/glCenterHorizontal"
+            app:layout_constraintTop_toBottomOf="@+id/tvTitle"
+            app:layout_constraintWidth_percent="0.744">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/glInnerCenterHorizontal"
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_percent="0.5" />
+
+
+                <androidx.appcompat.widget.AppCompatRadioButton
+                    android:id="@+id/tvAmount5"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_marginTop="24dp"
+                    android:layout_marginEnd="12dp"
+                    android:background="@drawable/bg_live_red_envelopes_amount"
+                    android:button="@null"
+                    android:checked="true"
+                    android:gravity="center"
+                    android:text="5"
+                    android:textColor="@color/color_live_red_envelopes_amount"
+                    android:textSize="16dp"
+                    app:layout_constraintDimensionRatio="w,48:81"
+                    app:layout_constraintEnd_toEndOf="@+id/glInnerCenterHorizontal"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintWidth_percent="0.4355" />
+
+                <androidx.appcompat.widget.AppCompatRadioButton
+                    android:id="@+id/tvAmount20"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_marginStart="12dp"
+                    android:background="@drawable/bg_live_red_envelopes_amount"
+                    android:button="@null"
+                    android:gravity="center"
+                    android:text="20"
+                    android:textColor="@color/color_live_red_envelopes_amount"
+                    android:textSize="16dp"
+                    app:layout_constraintBaseline_toBaselineOf="@+id/tvAmount5"
+                    app:layout_constraintDimensionRatio="w,48:81"
+                    app:layout_constraintStart_toStartOf="@+id/glInnerCenterHorizontal"
+                    app:layout_constraintTop_toTopOf="@+id/tvAmount5"
+                    app:layout_constraintWidth_percent="0.4355" />
+
+                <androidx.appcompat.widget.AppCompatRadioButton
+                    android:id="@+id/tvAmount50"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="12dp"
+                    android:background="@drawable/bg_live_red_envelopes_amount"
+                    android:button="@null"
+                    android:gravity="center"
+                    android:text="50"
+                    android:textColor="@color/color_live_red_envelopes_amount"
+                    android:textSize="16dp"
+                    app:layout_constraintDimensionRatio="w,48:81"
+                    app:layout_constraintEnd_toEndOf="@+id/glInnerCenterHorizontal"
+                    app:layout_constraintTop_toBottomOf="@+id/tvAmount5"
+                    app:layout_constraintWidth_percent="0.4355" />
+
+                <androidx.appcompat.widget.AppCompatRadioButton
+                    android:id="@+id/tvAmount100"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_marginStart="12dp"
+                    android:background="@drawable/bg_live_red_envelopes_amount"
+                    android:button="@null"
+                    android:gravity="center"
+                    android:text="100"
+                    android:textColor="@color/color_live_red_envelopes_amount"
+                    android:textSize="16dp"
+                    app:layout_constraintBaseline_toBaselineOf="@+id/tvAmount50"
+                    app:layout_constraintDimensionRatio="w,48:81"
+                    app:layout_constraintStart_toStartOf="@+id/glInnerCenterHorizontal"
+                    app:layout_constraintTop_toTopOf="@+id/tvAmount50"
+                    app:layout_constraintWidth_percent="0.4355" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </RadioGroup>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvTimeNote"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="红包将在20:50发放"
+            android:textColor="#F9CC7F"
+            android:textSize="12dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/rgContent"
+            tools:text="红包将在20:50发放" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvSentRedEnvelopes"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="12dp"
+            android:background="@drawable/shape_live_red_envelopes_btn_normal"
+            android:gravity="center"
+            android:text="发红包"
+            android:textColor="#F04948"
+            android:textSize="14dp"
+            app:layout_constraintBottom_toTopOf="@+id/tvPayNote"
+            app:layout_constraintDimensionRatio="w,37:186"
+            app:layout_constraintEnd_toEndOf="@+id/glCenterHorizontal"
+            app:layout_constraintStart_toStartOf="@+id/glCenterHorizontal"
+            app:layout_constraintTop_toBottomOf="@+id/tvTimeNote"
+            app:layout_constraintWidth_percent="0.744" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvPayNote"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:text="红包优先从账户可提现余额中扣除，余额不足时，可通过微信支付进行充值。"
+            android:textColor="#F9CC7F"
+            android:textSize="11dp"
+            app:autoSizeMaxTextSize="11dp"
+            app:autoSizeMinTextSize="8dp"
+            app:autoSizeTextType="uniform"
+            app:layout_constraintBottom_toTopOf="@+id/tvCommissionNote"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintWidth_percent="0.904" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvCommissionNote"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:text="温馨提示：微信会收取0.6%的交易手费。"
+            android:textColor="#F3AA7C"
+            android:textSize="11dp"
+            app:autoSizeMaxTextSize="11dp"
+            app:autoSizeMinTextSize="8dp"
+            app:autoSizeTextType="uniform"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintWidth_percent="0.904" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/ivClose"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="6dp"
+            android:padding="6dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/ic_launcher_background"
+            app:layout_constraintDimensionRatio="w,1:1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintWidth_percent="0.1" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

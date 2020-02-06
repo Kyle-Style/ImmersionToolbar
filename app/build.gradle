@@ -9,7 +9,7 @@ android {
     buildToolsVersion "29.0.2"
     defaultConfig {
         applicationId "vip.superbrain.immersion.toolbar"
-        minSdkVersion 15
+        minSdkVersion 19
         targetSdkVersion 29
         versionCode 1
         versionName "1.0"
@@ -35,4 +35,6 @@ dependencies {
 
     api project(':Lib_Toolbar')
     implementation 'androidx.transition:transition:1.2.0'
+    implementation 'com.google.android.material:material:1.2.0-alpha03'
+    implementation 'com.alibaba:fastjson:1.1.71.android'
 }
