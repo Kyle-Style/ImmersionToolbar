@@ -9,5 +9,6 @@
         <attr name="isSupportBottomLine" format="boolean" />
         <attr name="bottomLineColor" format="color" />
         <attr name="bottomLineHeight" format="dimension" />
+        <attr name="contentHeight" format="dimension" />
     </declare-styleable>
 </resources>

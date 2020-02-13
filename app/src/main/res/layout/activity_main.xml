@@ -5,10 +5,10 @@
     android:layout_height="match_parent">
 
     <vip.superbrain.immersion.lib.toolbar.ImmersionToolbar
+        android:id="@+id/itbToolbar"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/default_toolbar_height"
-        app:layout_constraintTop_toTopOf="parent"
-        android:background="@color/colorAccent">
+        android:layout_height="100dp"
+        app:layout_constraintTop_toTopOf="parent">
 
         <androidx.appcompat.widget.AppCompatImageView
             android:layout_width="20dp"
@@ -17,7 +17,36 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent"/>
+            app:layout_constraintTop_toTopOf="parent" />
     </vip.superbrain.immersion.lib.toolbar.ImmersionToolbar>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnEffect"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="onEffect"
+        android:text="视差效果"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/itbToolbar" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnEmoji"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="onEffect"
+        android:text="视差效果"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnEffect" />
+
+    <androidx.emoji.widget.EmojiAppCompatTextView
+        android:id="@+id/tvEmojiTest"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:fadeScrollbars="false"
+        android:hint="Emoji测试"
+        android:padding="15dp"
+        android:scrollbars="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnEmoji" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

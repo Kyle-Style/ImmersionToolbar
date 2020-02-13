@@ -17,7 +17,7 @@ public class StatusBarUtils {
      * @param activity
      */
     @TargetApi(19)
-    public static void transparencyBar(Activity activity) {
+    public static void transparentizeStatusBar(Activity activity) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             Window window = activity.getWindow();
             window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);

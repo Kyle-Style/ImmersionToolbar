@@ -80,7 +80,7 @@ public class ImmersionToolbar extends ConstraintLayout {
                     titleColor = typedArray.getInt(index, DEFAULT_TITLE_COLOR);
                 } else if (index == R.styleable.Toolbar_Style_titleSize) {
                     titleSize = typedArray.getInt(index, DEFAULT_TITLE_SIZE);
-                } else if (index == R.styleable.Toolbar_Style_bottomLineColor) {
+                } else if (index == R.styleable.Toolbar_Style_isSupportBottomLine) {
                     isSupportBottomLine = typedArray.getBoolean(index, DEFAULT_IS_SUPPORT_BOTTOM_LINE);
                 } else if (index == R.styleable.Toolbar_Style_bottomLineColor) {
                     bottomLineColor = typedArray.getInt(index, DEFAULT_BOTTOM_LINE_COLOR);
