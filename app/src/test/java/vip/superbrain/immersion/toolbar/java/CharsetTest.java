@@ -10,7 +10,7 @@ public class CharsetTest {
     @Test
     public void testCodePoint() {
         String content = "\uD83D\uDC68\u200D\uD83D\uDC69\u200D\uD83D\uDC67\u200D\uD83D\uDC67";
-        System.out.println(EmojiHelper.getInstance().getVisionCharCount(content));
+        System.out.println(EmojiHelper.getInstance().getVisionSymbolCount(content));
 
 //        EmojiUtils.INSTANCE.unicode(content);
         

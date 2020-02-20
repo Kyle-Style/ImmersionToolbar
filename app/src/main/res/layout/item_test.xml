@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/ivAvatar"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#ffffff">
+
+    <vip.superbrain.immersion.toolbar.avatar.WeChatAvatarView
+        android:id="@+id/wcaVAvatar"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginBottom="12dp"
+        android:background="@drawable/bg_we_chat_group_avatar"
+        android:padding="1dp"
+        app:layout_constraintBottom_toTopOf="@+id/bottomLine"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvCommunityName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="19dp"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:textColor="#666666"
+        android:textSize="16dp"
+        app:layout_constraintEnd_toStartOf="@+id/ivArrowRight"
+        app:layout_constraintStart_toEndOf="@+id/wcaVAvatar"
+        app:layout_constraintTop_toTopOf="@+id/wcaVAvatar"
+        tools:text="社群名称社群名称社群名称社群名称社群名称" />
+
+    <ImageView
+        android:id="@+id/ivArrowRight"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="10dp"
+        android:src="@mipmap/ic_launcher_round"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/stVTypeName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:background="#CCF5DD"
+        android:paddingStart="5dp"
+        android:paddingTop="3dp"
+        android:paddingEnd="5dp"
+        android:paddingBottom="3dp"
+        android:textColor="#0AAA1A"
+        android:textSize="11dp"
+        app:layout_constraintStart_toStartOf="@+id/tvCommunityName"
+        app:layout_constraintTop_toBottomOf="@+id/tvCommunityName"
+        tools:text="免费" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvCountAndTotal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawablePadding="4dp"
+        android:gravity="center"
+        android:textSize="12dp"
+        app:layout_constraintBottom_toBottomOf="@+id/wcaVAvatar"
+        app:layout_constraintStart_toStartOf="@+id/tvCommunityName"
+        tools:text="112人/999人" />
+
+    <!--  最后一个条目需要隐藏  -->
+    <View
+        android:id="@+id/bottomLine"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:background="#f6f6f6"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/wcaVAvatar" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

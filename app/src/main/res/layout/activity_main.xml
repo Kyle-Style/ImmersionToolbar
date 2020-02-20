@@ -38,6 +38,22 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnEffect" />
 
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/tvBehavior"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="behavior"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnEmoji" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/tvSwitch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Wsitch"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvBehavior" />
+
     <androidx.emoji.widget.EmojiAppCompatTextView
         android:id="@+id/tvEmojiTest"
         android:layout_width="match_parent"
@@ -47,6 +63,6 @@
         android:padding="15dp"
         android:scrollbars="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnEmoji" />
+        app:layout_constraintTop_toBottomOf="@+id/tvBehavior" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
