@@ -28,8 +28,8 @@ abstract class BaseWeChatAvatarRecyclerView<T>(context: Context, attrs: Attribut
     var data: ArrayList<T> = arrayListOf()
         set(value) {
             field?.clear()
-            adapter?.notifyDataSetChanged()
-            field = value
+            field.addAll(value)
+            field.reverse()
             if (adapter is BaseWeChatAvatarRecyclerView<*>.Adapter) {
                 (adapter as BaseWeChatAvatarRecyclerView<*>.Adapter).apply {
                     columnCount = WeChatAvatarHelper.instance.getColumnCount(field?.size)
@@ -44,7 +44,7 @@ abstract class BaseWeChatAvatarRecyclerView<T>(context: Context, attrs: Attribut
         adapter = Adapter()
     }
 
-    abstract fun bindHolder(holder: ViewHolder, itemData: T, type: Int)
+    abstract fun bindHolder(holder: ViewHolder, itemData: T, position:Int, type: Int)
 
     abstract fun itemLayoutId(): Int
 
@@ -76,15 +76,15 @@ abstract class BaseWeChatAvatarRecyclerView<T>(context: Context, attrs: Attribut
             if (rowCount == columnCount && columnCount > 1) {
                 if(row + 1 == rowCount){
                     if (column == 0) {
-                        return CORNER_TYPE_BOTTOM_LEFT
-                    } else if(column + 1 == columnCount) {
                         return CORNER_TYPE_BOTTOM_RIGHT
+                    } else if(column + 1 == columnCount) {
+                        return CORNER_TYPE_BOTTOM_LEFT
                     }
                 } else if(row == 0 && itemCount == rowCount * columnCount){
                     if (column == 0) {
-                        return CORNER_TYPE_TOP_LEFT
-                    } else if(column + 1 == columnCount) {
                         return CORNER_TYPE_TOP_RIGHT
+                    } else if(column + 1 == columnCount) {
+                        return CORNER_TYPE_TOP_LEFT
                     }
                 }
             }
@@ -92,7 +92,7 @@ abstract class BaseWeChatAvatarRecyclerView<T>(context: Context, attrs: Attribut
         }
 
         override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-            bindHolder(holder, data?.get(position), getType(position))
+            bindHolder(holder, data?.get(position), position, getType(position))
         }
     }
 

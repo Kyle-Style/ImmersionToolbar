@@ -56,7 +56,7 @@ class WeChatAvatarLayoutManager : RecyclerView.LayoutManager() {
                 view.layoutParams.height = itemWidthHeight
 
 
-                left = itemWidthHeight * column + paddingLeft + getColumnExtra(row, itemCount, columnCount, itemWidthHeight).toInt()
+                left = itemWidthHeight * (columnCount - column - 1) + paddingLeft + getColumnExtra(row, itemCount, columnCount, itemWidthHeight).toInt()
                 top = itemWidthHeight * row + (columnCount - rowCount) * itemWidthHeight.toFloat().div(2).toInt() + paddingTop
 
                 layoutDecoratedWithMargins(view, left, top, left + itemWidthHeight, top + itemWidthHeight)
@@ -72,7 +72,7 @@ class WeChatAvatarLayoutManager : RecyclerView.LayoutManager() {
                     0F
                 }
                 else -> {
-                    itemWidthHeight * (columnCount - mode) / 2F
+                    -itemWidthHeight * (columnCount - mode) / 2F
                 }
             } else 0F
     }

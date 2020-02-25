@@ -20,8 +20,25 @@ class WeChatAvatarView @JvmOverloads constructor(
 ) :
     BaseWeChatAvatarRecyclerView<String>(context, attrs, defStyleAttr) {
 
-    override fun bindHolder(holder: ViewHolder, itemData: String, type: Int) {
+    override fun bindHolder(holder: ViewHolder, itemData: String, position:Int, type: Int) {
         Glide.with(this).load(itemData).centerCrop().into(holder.itemView.ivAvatar)
+        when (type) {
+            CORNER_TYPE_TOP_LEFT -> {
+                holder.itemView.tvPosition.text = "左上"
+            }
+            CORNER_TYPE_TOP_RIGHT -> {
+                holder.itemView.tvPosition.text = "右上"
+            }
+            CORNER_TYPE_BOTTOM_LEFT -> {
+                holder.itemView.tvPosition.text = "左下"
+            }
+            CORNER_TYPE_BOTTOM_RIGHT -> {
+                holder.itemView.tvPosition.text = "右下"
+            }
+            else -> {
+                holder.itemView.tvPosition.text = "o"
+            }
+        }
     }
 
     override fun itemLayoutId(): Int {
